@@ -33,6 +33,18 @@ namespace HelloWorldWebApp.Controllers
 
         }
 
+        [HttpGet]
+        public void AddTeamMember(string teamMember)
+        {
+            teamInfo.TeamMembers.Add(teamMember);
+        }
+        
+        [HttpGet]
+        public int GetCount()
+        {
+            return teamInfo.TeamMembers.Count;
+        }
+
         public IActionResult Index()
         {
             return View(teamInfo);
