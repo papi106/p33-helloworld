@@ -2,6 +2,7 @@
 // Copyright (c) Principal 33. All rights reserved.
 // </copyright>
 
+using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,7 @@ namespace HelloWorldWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<ITeamService>(new TeamService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
