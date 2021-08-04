@@ -1,4 +1,6 @@
-using System;
+// <copyright file="ErrorViewModel.cs" company="Principal 33">
+// Copyright (c) Principal 33. All rights reserved.
+// </copyright>
 
 namespace HelloWorldWebApp.Models
 {
@@ -6,6 +8,6 @@ namespace HelloWorldWebApp.Models
     {
         public string RequestId { get; set; }
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public bool ShowRequestId => !string.IsNullOrEmpty(this.RequestId);
     }
 }

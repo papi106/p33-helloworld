@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// <copyright file="TeamInfo.cs" company="Principal 33">
+// Copyright (c) Principal 33. All rights reserved.
+// </copyright>
+
+using System.Collections.Generic;
 
 namespace HelloWorldWebApp.Models
 {
@@ -7,10 +11,5 @@ namespace HelloWorldWebApp.Models
         public string Name { get; set; }
 
         public List<string> TeamMembers { get; set; }
-
-        public TeamInfo()
-        {
-
-        }
     }
 }
