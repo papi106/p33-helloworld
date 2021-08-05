@@ -1,8 +1,5 @@
-﻿using HelloWorldWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using HelloWorldWebApp.Models;
 
 namespace HelloWorldWebApp.Services
 {
@@ -36,6 +33,5 @@ namespace HelloWorldWebApp.Services
         {
             teamInfo.TeamMembers.Add(name);
         }
-
     }
 }
