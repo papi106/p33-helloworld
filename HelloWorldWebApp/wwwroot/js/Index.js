@@ -21,6 +21,7 @@ $(document).ready(function () {
                     </li>`);
 
                 $("#nameField").val("");
+                document.getElementById("addMembersButton").disabled = true;
             }
         })
     })
@@ -39,3 +40,15 @@ function deleteMember(index) {
         }
     })
 }
+
+(function () {
+
+    $('#nameField').on('change textInput input', function () {
+        var inputVal = this.value;
+        if (inputVal != "") {
+            document.getElementById("addMembersButton").disabled = false;
+        } else {
+            document.getElementById("addMembersButton").disabled = true;
+        }
+    });
+}());
