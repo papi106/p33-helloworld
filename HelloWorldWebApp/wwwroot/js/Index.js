@@ -3,7 +3,6 @@ $(document).ready(function () {
     // see https://api.jquery.com/click/
     $("#addMembersButton").click(function () {
         var newcomerName = $("#nameField").val();
-        var length = $("#teamMembers").children().length;
 
         $.ajax({
             url: "/Home/AddTeamMember",
@@ -16,7 +15,7 @@ $(document).ready(function () {
                 $("#teamMembers").append(
                     `<li class="member">
                         <span class="name" >${newcomerName}</span>
-                        <span class="delete fa fa-remove" onclick="deleteMember(${length})"></span>
+                        <span class="delete fa fa-remove" onclick="deleteMember(${result})"></span>
                         <span class="pencil fa fa-pencil" ></span>
                     </li>`);
 

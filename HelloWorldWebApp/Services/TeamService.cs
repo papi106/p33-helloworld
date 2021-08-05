@@ -12,16 +12,24 @@ namespace HelloWorldWebApp.Services
             this.teamInfo = new TeamInfo
             {
                 Name = "Team 3",
-                TeamMembers = new List<string>(new string[]
-               {
-                    "Sechei Radu",
-                    "Tanase Teona",
-                    "Duma Dragos",
-                    "Campean Leon",
-                    "Naghi Claudia",
-                    "Marian George",
-               }),
+                TeamMembers = new List<TeamMember>(),
             };
+
+            string[] teamMembersData = new string[]
+           {
+                "Sechei Radu",
+                "Tanase Teona",
+                "Duma Dragos",
+                "Campean Leon",
+                "Naghi Claudia",
+                "Marian George",
+           };
+
+            int i = 0;
+            foreach (string name in teamMembersData)
+            {
+                teamInfo.TeamMembers.Add(new TeamMember(i++, name));
+            }
         }
 
         public TeamInfo GetTeamInfo()
@@ -31,12 +39,17 @@ namespace HelloWorldWebApp.Services
 
         public void RemoveMember(int memberIndex)
         {
-            teamInfo.TeamMembers.RemoveAt(memberIndex);
+            int listIndex = teamInfo.TeamMembers.FindIndex(element => element.Id == memberIndex);
+
+            teamInfo.TeamMembers.RemoveAt(listIndex);
         }
 
-        public void AddTeamMember(string name)
+        public int AddTeamMember(string name)
         {
-            teamInfo.TeamMembers.Add(name);
+            int newId = teamInfo.TeamMembers.Count;
+            teamInfo.TeamMembers.Add(new TeamMember(newId, name));
+
+            return newId;
         }
     }
 }

@@ -20,8 +20,8 @@
             var member = Model.TeamMembers[i];
 
             <li class="member">
-                <span class="name">@member</span>
-                <span class="delete fa fa-remove" onclick="deleteMember(@i)"></span>
+                <span class="name">@member.Name</span>
+                <span class="delete fa fa-remove" onclick="deleteMember(@member.Id)"></span>
                 <span class="pencil fa fa-pencil"></span>
             </li>
         }
