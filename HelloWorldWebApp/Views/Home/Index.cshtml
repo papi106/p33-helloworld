@@ -18,17 +18,17 @@
         @for (var i = 0; i < Model.TeamMembers.Count; i++)
         {
             var member = Model.TeamMembers[i];
-
+            
             <li class="member">
-                <span class="name" >@member</span>
-                <span class="delete fa fa-remove"></span>
+                <span class="name">@member</span>
+                <span class="delete fa fa-remove" onclick="deleteMember(@i)"></span>
                 <span class="pencil fa fa-pencil" ></span>
             </li>
         }
     </ul>
 
-    <input type="text" id="nameField" title="Your name" />
-    <button class="btn btn-primary" id="addMembersButton" title="Create">Create</button>
+    <input type="text" id="nameField" title="Your name"/>
+    <button class="btn btn-primary" id="addMembersButton" title="Create" >Create</button>
 
 
 </div>

@@ -29,6 +29,11 @@ namespace HelloWorldWebApp.Services
             return teamInfo;
         }
 
+        public void RemoveMember(int memberIndex)
+        {
+            teamInfo.TeamMembers.RemoveAt(memberIndex);
+        }
+
         public void AddTeamMember(string name)
         {
             teamInfo.TeamMembers.Add(name);

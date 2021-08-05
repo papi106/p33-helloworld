@@ -28,6 +28,11 @@ namespace HelloWorldWebApp.Controllers
             teamService.AddTeamMember(teamMember);
         }
 
+        [HttpDelete]
+        public void RemoveMember(int memberIndex){
+            teamService.RemoveMember(memberIndex);
+        }
+
         [HttpGet]
         public int GetCount()
         {
