@@ -23,7 +23,7 @@ namespace HelloWorldWebApp.Tests
         public void RemoveMemberFromTheTeam()
         {
             // Assume
-            TeamService teamService = new TeamService();
+            ITeamService teamService = new TeamService();
 
             // Act
             teamService.RemoveMember(2);
