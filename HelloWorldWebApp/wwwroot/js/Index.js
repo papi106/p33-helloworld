@@ -52,3 +52,9 @@ function deleteMember(index) {
         }
     });
 }());
+
+(function () {
+    $("#clearButton").click(function () {
+        document.getElementById("nameField").value = "";
+    });
+}());

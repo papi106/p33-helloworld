@@ -29,7 +29,8 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpDelete]
-        public void RemoveMember(int memberIndex){
+        public void RemoveMember(int memberIndex)
+        {
             teamService.RemoveMember(memberIndex);
         }
 
