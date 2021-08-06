@@ -50,5 +50,11 @@ namespace HelloWorldWebApp.Services
 
             return newId;
         }
+
+        public void UpdateMemberName(int memberId, string name)
+        {
+            int index = teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
+            teamInfo.TeamMembers[index].Name = name;
+        }
     }
 }

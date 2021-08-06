@@ -34,6 +34,12 @@ namespace HelloWorldWebApp.Controllers
             teamService.RemoveMember(memberIndex);
         }
 
+        [HttpPost]
+        public void UpdateMemberName(int memberId, string name)
+        {
+            teamService.UpdateMemberName(memberId, name);
+        }
+
         [HttpGet]
         public int GetCount()
         {
