@@ -25,10 +25,9 @@ namespace HelloWorldWebApp.Services
                 "Marian George",
            };
 
-            int i = 0;
             foreach (string name in teamMembersData)
             {
-                teamInfo.TeamMembers.Add(new TeamMember(i++, name));
+                AddTeamMember(name);
             }
         }
 
@@ -37,16 +36,16 @@ namespace HelloWorldWebApp.Services
             return teamInfo;
         }
 
-        public void RemoveMember(int memberIndex)
+        public void RemoveMember(int memberId)
         {
-            int listIndex = teamInfo.TeamMembers.FindIndex(element => element.Id == memberIndex);
+            int listIndex = teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
 
             teamInfo.TeamMembers.RemoveAt(listIndex);
         }
 
         public int AddTeamMember(string name)
         {
-            int newId = teamInfo.TeamMembers.Count;
+            int newId = teamInfo.TeamMembers.Count + 1;
             teamInfo.TeamMembers.Add(new TeamMember(newId, name));
 
             return newId;
