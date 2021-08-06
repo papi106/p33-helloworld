@@ -26,10 +26,12 @@ namespace HelloWorldWebApp.Tests
             ITeamService teamService = new TeamService();
 
             // Act
-            teamService.RemoveMember(2);
+            int initialCount = teamService.GetTeamInfo().TeamMembers.Count;
+            var id = teamService.GetTeamInfo().TeamMembers[0].Id;
+            teamService.RemoveMember(id);
 
             // Assert
-            Assert.Equal(5, teamService.GetTeamInfo().TeamMembers.Count);
+            Assert.Equal(initialCount - 1, teamService.GetTeamInfo().TeamMembers.Count);
         }
 
         [Fact]
