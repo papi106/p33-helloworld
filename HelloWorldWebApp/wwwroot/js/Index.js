@@ -16,13 +16,27 @@ $(document).ready(function () {
                     `<li class="member">
                         <span class="name" >${newcomerName}</span>
                         <span class="delete fa fa-remove" onclick="deleteMember(${result})"></span>
-                        <span class="pencil fa fa-pencil" ></span>
+                        <span class="pencil fa fa-pencil"></span>
                     </li>`);
 
                 $("#nameField").val("");
                 document.getElementById("addMembersButton").disabled = true;
             }
         })
+    })
+
+    $('#submit').click(function () {
+        const id = $('#editClassmate').attr('member-id');
+        console.log(id);
+    });
+
+    $("#teamMembers").on("click", ".pencil", function () {
+        var targetMemberTag = $(this).closest('li');
+        var id = targetMemberTag.attr('member-id');
+        var currentName = targetMemberTag.find(".name").text();
+        $('#editClassmate').attr("member-id", id);
+        $('#classmateName').val(currentName);
+        $('#editClassmate').modal('show');
     })
 });
 
