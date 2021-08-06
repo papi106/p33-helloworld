@@ -38,9 +38,8 @@ namespace HelloWorldWebApp.Services
 
         public void RemoveMember(int memberId)
         {
-            int listIndex = teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
-
-            teamInfo.TeamMembers.RemoveAt(listIndex);
+            TeamMember member = GetMemberById(memberId);
+            teamInfo.TeamMembers.Remove(member);
         }
 
         public int AddTeamMember(string name)
@@ -53,8 +52,13 @@ namespace HelloWorldWebApp.Services
 
         public void UpdateMemberName(int memberId, string name)
         {
-            int index = teamInfo.TeamMembers.FindIndex(element => element.Id == memberId);
-            teamInfo.TeamMembers[index].Name = name;
+            TeamMember member = GetMemberById(memberId);
+            member.Name = name;
+        }
+
+        public TeamMember GetMemberById(int memberId)
+        {
+            return teamInfo.TeamMembers.Find(element => element.Id == memberId);
         }
     }
 }

@@ -11,5 +11,7 @@ namespace HelloWorldWebApp.Services
         public void UpdateMemberName(int memberId, string name);
 
         TeamInfo GetTeamInfo();
+
+        TeamMember GetMemberById(int memberId);
     }
 }
