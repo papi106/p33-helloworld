@@ -25,10 +25,10 @@ namespace HelloWorldWebApp.Tests
         {
             // Assume
             ITeamService teamService = new TeamService();
-
-            // Act
             int initialCount = teamService.GetTeamInfo().TeamMembers.Count;
             var id = teamService.GetTeamInfo().TeamMembers[0].Id;
+
+            // Act
             teamService.RemoveMember(id);
 
             // Assert
@@ -48,6 +48,23 @@ namespace HelloWorldWebApp.Tests
             // Assert
             var member = teamService.GetMemberById(1);
             Assert.Equal("UnitTest", member.Name);
+        }
+
+        [Fact]
+        public void CheckIdProblem()
+        {
+            // Assume
+            ITeamService teamService = new TeamService();
+            var id = teamService.GetTeamInfo().TeamMembers[0].Id;
+
+            // Act
+            teamService.RemoveMember(id);
+            int memberId = teamService.AddTeamMember("Test");
+            teamService.RemoveMember(memberId);
+
+            // Assert
+            int lastIndex = teamService.GetTeamInfo().TeamMembers.Count;
+            Assert.NotEqual("Test", teamService.GetTeamInfo().TeamMembers[lastIndex - 1].Name);
         }
     }
 }
