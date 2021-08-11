@@ -3,18 +3,22 @@
 // </copyright>
 
 using System;
+using HelloWorldWebApp.Services;
 
 namespace HelloWorldWebApp.Models
 {
     public class TeamMember
     {
         private static int idGenerator = 0;
+        private readonly ITimeService timeService;
 
-        public TeamMember(string name)
+        public TeamMember(string name, ITimeService timeService)
         {
             Id = idGenerator;
             Name = name;
             idGenerator++;
+
+            this.timeService = timeService;
         }
 
         public int Id { get; set; }
@@ -25,7 +29,7 @@ namespace HelloWorldWebApp.Models
 
         public int GetAge()
         {
-            var age = DateTime.Now.Subtract(Birthday).Days;
+            var age = timeService.GetCurrentDate().Subtract(Birthday).Days;
             return age / 365;
         }
     }
