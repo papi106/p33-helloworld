@@ -45,11 +45,10 @@ namespace HelloWorldWebApp.Services
 
         public int AddTeamMember(string name)
         {
-            int count = teamInfo.TeamMembers.Count;
-            teamInfo.TeamMembers.Add(new TeamMember(name, timeService));
+            TeamMember newMember = new TeamMember(name, timeService);
+            teamInfo.TeamMembers.Add(newMember);
 
-            int newId = teamInfo.TeamMembers[count].Id;
-            return newId;
+            return newMember.Id;
         }
 
         public void UpdateMemberName(int memberId, string name)

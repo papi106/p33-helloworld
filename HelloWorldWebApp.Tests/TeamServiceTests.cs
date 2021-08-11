@@ -40,9 +40,9 @@ namespace HelloWorldWebApp.Tests
         {
             // Assume
             ITeamService teamService = new TeamService();
+            var id = teamService.GetTeamInfo().TeamMembers[0].Id;
 
             // Act
-            var id = teamService.GetTeamInfo().TeamMembers[0].Id;
             teamService.UpdateMemberName(id, "UnitTest");
 
             // Assert
