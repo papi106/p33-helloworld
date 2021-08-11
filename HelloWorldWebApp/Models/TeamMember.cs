@@ -6,14 +6,18 @@ namespace HelloWorldWebApp.Models
 {
     public class TeamMember
     {
-        public TeamMember(int id, string name)
+        private static int idGenerator = 0;
+
+        public TeamMember(string name)
         {
-            Id = id;
+            Id = idGenerator;
             Name = name;
+            idGenerator++;
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
+
     }
 }

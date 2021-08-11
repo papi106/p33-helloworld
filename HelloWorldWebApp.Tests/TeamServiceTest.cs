@@ -46,7 +46,7 @@ namespace HelloWorldWebApp.Tests
             teamService.UpdateMemberName(id, "UnitTest");
 
             // Assert
-            var member = teamService.GetMemberById(1);
+            var member = teamService.GetMemberById(id);
             Assert.Equal("UnitTest", member.Name);
         }
 
