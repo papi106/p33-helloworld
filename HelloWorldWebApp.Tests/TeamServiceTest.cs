@@ -45,7 +45,7 @@ namespace HelloWorldWebApp.Tests
 
             // Assert
             var member = teamService.GetMemberById(1);
-            Assert.Equal("UnitTest", "FAIL!!");
+            Assert.Equal("UnitTest", member.Name);
         }
     }
 }
