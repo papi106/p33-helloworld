@@ -13,10 +13,11 @@ namespace HelloWorldWebApp.Tests
             ITeamService teamService = new TeamService();
 
             //Act
+            int initialCount = teamService.GetTeamInfo().TeamMembers.Count;
             teamService.AddTeamMember("George");
 
             //Assert
-            Assert.Equal(7, teamService.GetTeamInfo().TeamMembers.Count);
+            Assert.Equal(initialCount + 1, teamService.GetTeamInfo().TeamMembers.Count);
         }
 
         [Fact]
@@ -41,7 +42,8 @@ namespace HelloWorldWebApp.Tests
             ITeamService teamService = new TeamService();
 
             // Act
-            teamService.UpdateMemberName(1, "UnitTest");
+            var id = teamService.GetTeamInfo().TeamMembers[0].Id;
+            teamService.UpdateMemberName(id, "UnitTest");
 
             // Assert
             var member = teamService.GetMemberById(1);
