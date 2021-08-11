@@ -2,6 +2,8 @@
 // Copyright (c) Principal 33. All rights reserved.
 // </copyright>
 
+using System;
+
 namespace HelloWorldWebApp.Models
 {
     public class TeamMember
@@ -19,5 +21,12 @@ namespace HelloWorldWebApp.Models
 
         public string Name { get; set; }
 
+        public DateTime Birthday { get; set; }
+
+        public int GetAge()
+        {
+            var age = DateTime.Now.Subtract(Birthday).Days;
+            return age / 365;
+        }
     }
 }

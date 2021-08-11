@@ -4,7 +4,7 @@ using Xunit;
 
 namespace HelloWorldWebApp.Tests
 {
-    public class TeamServiceTest
+    public class TeamServiceTests
     {
         [Fact]
         public void AddTeamMemberToTheTeam()
