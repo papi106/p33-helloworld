@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HelloWorldWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,11 +30,44 @@ namespace HelloWorldWebApp.Controllers
 
         public IEnumerable<DailyWeather> ConvertResponseToWeatherRecordList(string content)
         {
-            return new DailyWeather[]
+            var json = JObject.Parse(content);
+
+            List<DailyWeather> result = new List<DailyWeather>();
+            var jsonArray = json["daily"].Take(7);
+
+            foreach (var item in jsonArray)
             {
-                new DailyWeather(30, WeatherType.Sweltering, DateTime.Now),
-                new DailyWeather(32, WeatherType.Hot, DateTime.Now)
-            };
+                DailyWeather dailyWeatherRecord = new DailyWeather(30, WeatherType.Sweltering, DateTime.Now);
+                long unixDateTime = item.Value<long>("dt");
+
+                dailyWeatherRecord.Day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
+                dailyWeatherRecord.Temperature = item["temp"].Value<float>("day");
+
+                string weatherType = item["weather"][0].Value<string>("description");
+                dailyWeatherRecord.Type = ConvertToWeatherType(weatherType);
+
+                result.Add(dailyWeatherRecord);
+            }
+
+            return result;
+        }
+
+        private WeatherType ConvertToWeatherType(string weatherType)
+        {
+            switch (weatherType)
+            {
+                case "few clouds":
+                    return WeatherType.Cloudy;
+
+                case "light rain":
+                    return WeatherType.LightRain;
+
+                case "broken clouds":
+                    return WeatherType.BrokenClouds;
+
+                default:
+                    throw new Exception($"Unkown weather type - {weatherType}.");
+            }
         }
 
         // GET api/<WeatherController>/5
