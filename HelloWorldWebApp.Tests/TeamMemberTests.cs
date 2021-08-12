@@ -1,5 +1,6 @@
 ﻿using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,21 @@ namespace HelloWorldWebApp.Tests
 {
     public class TeamMemberTests
     {
-        private readonly ITimeService timeService;
+        private Mock<ITimeService> mock;
 
-        public TeamMemberTests()
+        private void InitializeMockService()
         {
-            timeService = new FakeTimeService();
+            mock = new Mock<ITimeService>();
+
+            mock.Setup( _ => _.GetCurrentDate()).Returns(new DateTime(2021, 8, 11));
         }
 
         [Fact]
         public void GettingAge()
         {
             //Assume
+            InitializeMockService();
+            var timeService = mock.Object;
             TeamMember newMember = new TeamMember("UnitTests", timeService);
             newMember.Birthday = new DateTime(1990, 9, 30);
 
@@ -30,14 +35,7 @@ namespace HelloWorldWebApp.Tests
 
             //Assert
             Assert.Equal(30, age);
-        }
-
-        private class FakeTimeService : ITimeService
-        {
-            public DateTime GetCurrentDate()
-            {
-                return new DateTime(2021, 8, 11);
-            }
+            mock.Verify(_ => _.GetCurrentDate(), Times.AtMostOnce());
         }
     }
 }
