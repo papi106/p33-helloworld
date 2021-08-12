@@ -14,9 +14,8 @@ namespace HelloWorldWebApp.Models
 
         public TeamMember(string name, ITimeService timeService)
         {
-            Id = idGenerator;
+            Id = idGenerator++;
             Name = name;
-            idGenerator++;
 
             this.timeService = timeService;
         }
