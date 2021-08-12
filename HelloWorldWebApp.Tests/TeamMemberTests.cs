@@ -35,7 +35,7 @@ namespace HelloWorldWebApp.Tests
 
             //Assert
             Assert.Equal(30, age);
-            mock.Verify(_ => _.GetCurrentDate(), Times.AtMostOnce());
+            mock.Verify(_ => _.GetCurrentDate(), Times.Once());
         }
     }
 }
