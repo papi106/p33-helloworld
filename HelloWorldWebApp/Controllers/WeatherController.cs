@@ -1,13 +1,10 @@
-﻿using HelloWorldWebApp.Models;
+﻿using System;
+using System.Collections.Generic;
+using HelloWorldWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace HelloWorldWebApp.Controllers
 {
     [Route("api/[controller]")]
@@ -26,10 +23,10 @@ namespace HelloWorldWebApp.Controllers
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
-            return ConvertResponseToWeatherForecastList(response.Content);
+            return ConvertResponseToWeatherRecordList(response.Content);
         }
 
-        private IEnumerable<DailyWeather> ConvertResponseToWeatherForecastList(string content)
+        public IEnumerable<DailyWeather> ConvertResponseToWeatherRecordList(string content)
         {
             return new DailyWeather[]
             {

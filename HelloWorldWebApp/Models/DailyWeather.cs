@@ -19,6 +19,5 @@ namespace HelloWorldWebApp.Models
         public WeatherType Type { get; set; }
 
         public DateTime Day { get; set; }
-
     }
 }
