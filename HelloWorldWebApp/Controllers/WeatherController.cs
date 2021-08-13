@@ -13,6 +13,8 @@ namespace HelloWorldWebApp.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
+        public const float KELVIN_CONST = 273.15f;
+
         private readonly string longitude = "46.7700";
         private readonly string latitude = "23.580";
         private readonly string apiKey = "35590ffc32b328af10511b2e696457d6";
@@ -31,19 +33,16 @@ namespace HelloWorldWebApp.Controllers
         public IEnumerable<DailyWeather> ConvertResponseToWeatherRecordList(string content)
         {
             var json = JObject.Parse(content);
-
-            List<DailyWeather> result = new List<DailyWeather>();
             var jsonArray = json["daily"].Take(7);
-            result.AddRange(jsonArray.Select(CreateDailyWeatherFromJToken));
 
-            return result;
+            return jsonArray.Select(CreateDailyWeatherFromJToken);
         }
 
         private DailyWeather CreateDailyWeatherFromJToken(JToken item)
         {
             long unixDateTime = item.Value<long>("dt");
             DateTime day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-            float temperature = item["temp"].Value<float>("day") - 272.88f;
+            float temperature = item["temp"].Value<float>("day") - KELVIN_CONST;
             string weatherType = item["weather"][0].Value<string>("description");
             WeatherType type = ConvertToWeatherType(weatherType);
 

@@ -26,7 +26,7 @@ namespace HelloWorldWebApp.Tests
 
             var firstDay = result.First();
             Assert.Equal(new DateTime(2021, 8, 12), firstDay.Day);
-            Assert.Equal(25, firstDay.Temperature);
+            Assert.Equal(24.730010986328125, firstDay.Temperature);
             Assert.Equal(WeatherType.Cloudy, firstDay.Type);
         }
     }
