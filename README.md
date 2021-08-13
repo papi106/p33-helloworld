@@ -1,3 +1,9 @@
 # Hello World
-This is a hello world project.
-Wrote using VIM, ew.
+
+## How to deploy on Heroku
+Log-in to Heroku: 
+```
+heroku login
+```
+
+Build Container
