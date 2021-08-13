@@ -4,6 +4,7 @@ using System.Linq;
 using HelloWorldWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -23,13 +24,11 @@ namespace HelloWorldWebApp.Controllers
 
         private readonly WeatherConfigurationSettings settings;
 
-        public WeatherController(IOptions<WeatherConfigurationSettings> configurationSettings)
+        public WeatherController(IConfiguration configurationSettings)
         {
-            settings = configurationSettings.Value;
-
-            longitude = settings.Longitude;
-            latitude = settings.Latitude;
-            apiKey = settings.ApiKey;
+            longitude = configurationSettings["WeatherForecast:Longitude"];
+            latitude = configurationSettings["WeatherForecast:Latitude"];
+            apiKey = configurationSettings["WeatherForecast:ApiKey"];
         }
 
         // GET: api/<WeatherController>
@@ -75,6 +74,9 @@ namespace HelloWorldWebApp.Controllers
                     return WeatherType.LightRain;
 
                 case "broken clouds":
+                    return WeatherType.BrokenClouds;
+
+                case "moderate rain":
                     return WeatherType.BrokenClouds;
 
                 default:
