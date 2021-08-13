@@ -2,6 +2,9 @@
 // Copyright (c) Principal 33. All rights reserved.
 // </copyright>
 
+using System;
+using System.IO;
+using System.Reflection;
 using HelloWorldWebApp.Controllers;
 using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Builder;
@@ -11,9 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.IO;
-using System.Reflection;
 
 namespace HelloWorldWebApp
 {
