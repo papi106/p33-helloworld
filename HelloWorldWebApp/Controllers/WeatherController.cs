@@ -31,6 +31,10 @@ namespace HelloWorldWebApp.Controllers
             apiKey = configurationSettings["WeatherForecast:ApiKey"];
         }
 
+        public WeatherController()
+        {
+        }
+
         // GET: api/<WeatherController>
         [HttpGet]
         public IEnumerable<DailyWeather> Get()
