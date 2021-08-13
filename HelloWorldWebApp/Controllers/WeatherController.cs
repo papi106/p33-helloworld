@@ -37,16 +37,14 @@ namespace HelloWorldWebApp.Controllers
 
             foreach (var item in jsonArray)
             {
-                DailyWeather dailyWeatherRecord = new DailyWeather(30, WeatherType.Sweltering, DateTime.Now);
                 long unixDateTime = item.Value<long>("dt");
-
-                dailyWeatherRecord.Day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-                dailyWeatherRecord.Temperature = item["temp"].Value<float>("day") - 272.88f;
+                DateTime day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
+                float temperature = item["temp"].Value<float>("day") - 272.88f;
 
                 string weatherType = item["weather"][0].Value<string>("description");
-                dailyWeatherRecord.Type = ConvertToWeatherType(weatherType);
+                WeatherType type = ConvertToWeatherType(weatherType);
 
-                result.Add(dailyWeatherRecord);
+                result.Add(new DailyWeather(temperature, type, day));
             }
 
             return result;
