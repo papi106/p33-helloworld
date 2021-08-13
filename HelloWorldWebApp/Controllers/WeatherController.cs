@@ -37,17 +37,21 @@ namespace HelloWorldWebApp.Controllers
 
             foreach (var item in jsonArray)
             {
-                long unixDateTime = item.Value<long>("dt");
-                DateTime day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-                float temperature = item["temp"].Value<float>("day") - 272.88f;
-
-                string weatherType = item["weather"][0].Value<string>("description");
-                WeatherType type = ConvertToWeatherType(weatherType);
-
-                result.Add(new DailyWeather(temperature, type, day));
+                result.Add(CreateDailyWeatherFromJToken(item));
             }
 
             return result;
+        }
+
+        private DailyWeather CreateDailyWeatherFromJToken(JToken item)
+        {
+            long unixDateTime = item.Value<long>("dt");
+            DateTime day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
+            float temperature = item["temp"].Value<float>("day") - 272.88f;
+            string weatherType = item["weather"][0].Value<string>("description");
+            WeatherType type = ConvertToWeatherType(weatherType);
+
+            return new DailyWeather(temperature, type, day);
         }
 
         // GET api/<WeatherController>/5
