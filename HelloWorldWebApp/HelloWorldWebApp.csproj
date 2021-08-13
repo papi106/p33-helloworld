@@ -6,6 +6,10 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Projects\p33-helloworld\HelloWorldWebApp\HelloWorldWebApp.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Controllers\WeatherController.cs~RF3947325.TMP" />
   </ItemGroup>
@@ -22,6 +26,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
 		<AdditionalFiles Include="..\stylecop.json" />	
 	</ItemGroup>
 </Project>
