@@ -41,7 +41,7 @@ namespace HelloWorldWebApp.Controllers
                 long unixDateTime = item.Value<long>("dt");
 
                 dailyWeatherRecord.Day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-                dailyWeatherRecord.Temperature = item["temp"].Value<float>("day");
+                dailyWeatherRecord.Temperature = item["temp"].Value<float>("day") - 272.88f;
 
                 string weatherType = item["weather"][0].Value<string>("description");
                 dailyWeatherRecord.Type = ConvertToWeatherType(weatherType);
@@ -50,6 +50,19 @@ namespace HelloWorldWebApp.Controllers
             }
 
             return result;
+        }
+
+        // GET api/<WeatherController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // DELETE api/<WeatherController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
 
         private WeatherType ConvertToWeatherType(string weatherType)
@@ -68,19 +81,6 @@ namespace HelloWorldWebApp.Controllers
                 default:
                     throw new Exception($"Unkown weather type - {weatherType}.");
             }
-        }
-
-        // GET api/<WeatherController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // DELETE api/<WeatherController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
