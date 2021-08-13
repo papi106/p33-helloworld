@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using HelloWorldWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -15,9 +17,20 @@ namespace HelloWorldWebApp.Controllers
     {
         public const float KELVIN_CONST = 273.15f;
 
-        private readonly string longitude = "46.7700";
-        private readonly string latitude = "23.580";
-        private readonly string apiKey = "35590ffc32b328af10511b2e696457d6";
+        private readonly string longitude;
+        private readonly string latitude;
+        private readonly string apiKey;
+
+        private readonly WeatherConfigurationSettings settings;
+
+        public WeatherController(IOptions<WeatherConfigurationSettings> configurationSettings)
+        {
+            settings = configurationSettings.Value;
+
+            longitude = settings.Longitude;
+            latitude = settings.Latitude;
+            apiKey = settings.ApiKey;
+        }
 
         // GET: api/<WeatherController>
         [HttpGet]
@@ -36,17 +49,6 @@ namespace HelloWorldWebApp.Controllers
             var jsonArray = json["daily"].Take(7);
 
             return jsonArray.Select(CreateDailyWeatherFromJToken);
-        }
-
-        private DailyWeather CreateDailyWeatherFromJToken(JToken item)
-        {
-            long unixDateTime = item.Value<long>("dt");
-            DateTime day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-            float temperature = item["temp"].Value<float>("day") - KELVIN_CONST;
-            string weatherType = item["weather"][0].Value<string>("description");
-            WeatherType type = ConvertToWeatherType(weatherType);
-
-            return new DailyWeather(temperature, type, day);
         }
 
         // GET api/<WeatherController>/5
@@ -78,6 +80,17 @@ namespace HelloWorldWebApp.Controllers
                 default:
                     throw new Exception($"Unkown weather type - {weatherType}.");
             }
+        }
+
+        private DailyWeather CreateDailyWeatherFromJToken(JToken item)
+        {
+            long unixDateTime = item.Value<long>("dt");
+            DateTime day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
+            float temperature = item["temp"].Value<float>("day") - KELVIN_CONST;
+            string weatherType = item["weather"][0].Value<string>("description");
+            WeatherType type = ConvertToWeatherType(weatherType);
+
+            return new DailyWeather(temperature, type, day);
         }
     }
 }

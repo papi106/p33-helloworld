@@ -2,6 +2,7 @@
 // Copyright (c) Principal 33. All rights reserved.
 // </copyright>
 
+using HelloWorldWebApp.Controllers;
 using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,9 +25,13 @@ namespace HelloWorldWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            // services.AddSingleton<IWeatherConfigurationSettings, WeatherConfigurationSettings>();
             services.AddSingleton<ITeamService>(new TeamService());
             services.AddSingleton<ITimeService>(new TimeService());
+
+            services.Configure<WeatherConfigurationSettings>(Configuration);
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
