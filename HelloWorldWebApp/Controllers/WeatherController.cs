@@ -22,17 +22,15 @@ namespace HelloWorldWebApp.Controllers
         private readonly string latitude;
         private readonly string apiKey;
 
-        private readonly WeatherConfigurationSettings settings;
+        private readonly IWeatherConfigurationSettings settings;
 
-        public WeatherController(IConfiguration configurationSettings)
+        public WeatherController(IWeatherConfigurationSettings configurationSettings)
         {
-            longitude = configurationSettings["WeatherForecast:Longitude"];
-            latitude = configurationSettings["WeatherForecast:Latitude"];
-            apiKey = configurationSettings["WeatherForecast:ApiKey"];
-        }
+            settings = configurationSettings;
 
-        public WeatherController()
-        {
+            longitude = configurationSettings.Longitude;
+            latitude = configurationSettings.Latitude;
+            apiKey = configurationSettings.ApiKey;
         }
 
         // GET: api/<WeatherController>
@@ -82,6 +80,9 @@ namespace HelloWorldWebApp.Controllers
 
                 case "moderate rain":
                     return WeatherType.BrokenClouds;
+
+                case "clear sky":
+                    return WeatherType.ClearSky;
 
                 default:
                     throw new Exception($"Unkown weather type - {weatherType}.");

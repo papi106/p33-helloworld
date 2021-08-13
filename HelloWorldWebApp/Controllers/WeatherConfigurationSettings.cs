@@ -9,11 +9,17 @@ namespace HelloWorldWebApp
 {
     public class WeatherConfigurationSettings : IWeatherConfigurationSettings
     {
+        public WeatherConfigurationSettings(IConfiguration configurationSettings)
+        {
+            Longitude = configurationSettings["WeatherForecast:Longitude"];
+            Latitude = configurationSettings["WeatherForecast:Latitude"];
+            ApiKey = configurationSettings["WeatherForecast:ApiKey"];
+        }
+
         public string Longitude { get; set; }
 
         public string Latitude { get; set; }
 
         public string ApiKey { get; set; }
-
     }
 }
