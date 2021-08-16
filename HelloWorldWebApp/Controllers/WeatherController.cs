@@ -13,7 +13,7 @@ using RestSharp;
 namespace HelloWorldWebApp.Controllers
 {
     /// <summary>
-    /// Fetch data from Weather API.
+    /// Fetch data from Weather API. <see href="https://openweathermap.org/api"/>
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -56,24 +56,16 @@ namespace HelloWorldWebApp.Controllers
             return jsonArray.Select(CreateDailyWeatherFromJToken);
         }
 
-        // GET api/<WeatherController>/5
-
         /// <summary>
         /// Get a weather forecast for the day in specified amount of days from now.
         /// </summary>
         /// <param name="index">Amount of days from now (from 0 to 7).</param>
         /// <returns>The weather forecast.</returns>
-        [HttpGet("{id}")]
+        [HttpGet("{index}")]
         public DailyWeather Get(int index)
         {
             var records = Get();
             return records.ElementAt(index);
-        }
-
-        // DELETE api/<WeatherController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
 
         private WeatherType ConvertToWeatherType(string weatherType)
