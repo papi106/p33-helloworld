@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -34,10 +35,13 @@ namespace HelloWorldWebApp.Tests
             Assert.Equal(WeatherType.Cloudy, firstDay.Type);
         }
 
+        [Fact]
         private string LoadJSONFromResource()
         {
             var assembly = this.GetType().Assembly;
-            var resourceStream = assembly.GetManifestResourceStream("HelloWorldWebApp.Tests.TestData.ContentFromWeaherAPI.json");
+            var assemblyName = assembly.GetName().Name;
+            string resourceName = $"{ assemblyName}.TestData.ContentFromWeaherAPI.json";
+            var resourceStream = assembly.GetManifestResourceStream(resourceName);
             using (var tr = new StreamReader(resourceStream))
             {
                 return tr.ReadToEnd();
