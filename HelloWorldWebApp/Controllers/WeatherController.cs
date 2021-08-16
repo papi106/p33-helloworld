@@ -47,6 +47,7 @@ namespace HelloWorldWebApp.Controllers
             return ConvertResponseToWeatherRecordList(response.Content);
         }
 
+        [NonAction]
         public IEnumerable<DailyWeather> ConvertResponseToWeatherRecordList(string content)
         {
             var json = JObject.Parse(content);
