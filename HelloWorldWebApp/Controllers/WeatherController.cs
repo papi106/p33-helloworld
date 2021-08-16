@@ -57,10 +57,17 @@ namespace HelloWorldWebApp.Controllers
         }
 
         // GET api/<WeatherController>/5
+
+        /// <summary>
+        /// Get a weather forecast for the day in specified amount of days from now.
+        /// </summary>
+        /// <param name="index">Amount of days from now (from 0 to 7).</param>
+        /// <returns>The weather forecast.</returns>
         [HttpGet("{id}")]
-        public string Get(int id)
+        public DailyWeather Get(int index)
         {
-            return "value";
+            var records = Get();
+            return records.ElementAt(index);
         }
 
         // DELETE api/<WeatherController>/5
