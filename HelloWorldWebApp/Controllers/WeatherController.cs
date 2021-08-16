@@ -19,7 +19,7 @@ namespace HelloWorldWebApp.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        public const float KELVIN_CONST = 273.15f;
+        public const float KELVINCONST = 273.15f;
 
         private readonly string longitude;
         private readonly string latitude;
@@ -96,7 +96,7 @@ namespace HelloWorldWebApp.Controllers
         {
             long unixDateTime = item.Value<long>("dt");
             DateTime day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
-            float temperature = item["temp"].Value<float>("day") - KELVIN_CONST;
+            float temperature = item["temp"].Value<float>("day") - KELVINCONST;
             string weatherType = item["weather"][0].Value<string>("description");
             WeatherType type = ConvertToWeatherType(weatherType);
 
