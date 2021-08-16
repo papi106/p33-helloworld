@@ -2,6 +2,7 @@
 // Copyright (c) Principal 33. All rights reserved.
 // </copyright>
 
+using HelloWorldWebApp.Data;
 using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using HelloWorldWebApp.Data;
 
 namespace HelloWorldWebApp
 {
