@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace HelloWorldWebApp
 {
@@ -18,15 +19,25 @@ namespace HelloWorldWebApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config.AddJsonFile("projectsettings.json",
-                        optional: false,
-                        reloadOnChange: true);
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                var port = Environment.GetEnvironmentVariable("PORT");
+
+                webBuilder.UseStartup<Startup>()
+                .UseUrls("http://*:" + port);
+            });
+
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureAppConfiguration((hostingContext, config) =>
+        //        {
+        //            config.AddJsonFile("projectsettings.json",
+        //                optional: false,
+        //                reloadOnChange: true);
+        //        })
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseStartup<Startup>();
+        //        });
     }
 }
