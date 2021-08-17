@@ -12,17 +12,17 @@ namespace HelloWorldWebApp.Controllers
 {
     public class SkillsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public SkillsController(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         // GET: Skills
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Skill.ToListAsync());
+            return View(await context.Skill.ToListAsync());
         }
 
         // GET: Skills/Details/5
@@ -33,7 +33,7 @@ namespace HelloWorldWebApp.Controllers
                 return NotFound();
             }
 
-            var skill = await _context.Skill
+            var skill = await context.Skill
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (skill == null)
             {
@@ -58,8 +58,8 @@ namespace HelloWorldWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(skill);
-                await _context.SaveChangesAsync();
+                context.Add(skill);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -74,7 +74,7 @@ namespace HelloWorldWebApp.Controllers
                 return NotFound();
             }
 
-            var skill = await _context.Skill.FindAsync(id);
+            var skill = await context.Skill.FindAsync(id);
             if (skill == null)
             {
                 return NotFound();
@@ -99,8 +99,8 @@ namespace HelloWorldWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(skill);
-                    await _context.SaveChangesAsync();
+                    context.Update(skill);
+                    await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -128,7 +128,7 @@ namespace HelloWorldWebApp.Controllers
                 return NotFound();
             }
 
-            var skill = await _context.Skill
+            var skill = await context.Skill
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (skill == null)
             {
@@ -143,15 +143,15 @@ namespace HelloWorldWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var skill = await _context.Skill.FindAsync(id);
-            _context.Skill.Remove(skill);
-            await _context.SaveChangesAsync();
+            var skill = await context.Skill.FindAsync(id);
+            context.Skill.Remove(skill);
+            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SkillExists(int id)
         {
-            return _context.Skill.Any(e => e.Id == id);
+            return context.Skill.Any(e => e.Id == id);
         }
     }
 }

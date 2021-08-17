@@ -9,7 +9,7 @@ namespace HelloWorldWebApp.Services
 
         public TeamService()
         {
-            this.teamInfo = new TeamInfo
+            teamInfo = new TeamInfo
             {
                 Name = "Team 3",
                 TeamMembers = new List<TeamMember>(),
@@ -44,10 +44,10 @@ namespace HelloWorldWebApp.Services
 
         public int AddTeamMember(string name)
         {
-            int newId = teamInfo.TeamMembers.Count + 1;
-            teamInfo.TeamMembers.Add(new TeamMember(newId, name));
+            var newMember = new TeamMember() { Name = name };
+            teamInfo.TeamMembers.Add(newMember);
 
-            return newId;
+            return newMember.Id;
         }
 
         public void UpdateMemberName(int memberId, string name)

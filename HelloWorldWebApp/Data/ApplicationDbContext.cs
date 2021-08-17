@@ -13,6 +13,9 @@ namespace HelloWorldWebApp.Data
             : base(options)
         {
         }
+
         public DbSet<HelloWorldWebApp.Models.Skill> Skill { get; set; }
+
+        public DbSet<HelloWorldWebApp.Models.TeamMember> TeamMembers { get; set; }
     }
 }
