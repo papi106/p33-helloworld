@@ -27,7 +27,7 @@ namespace HelloWorldWebApp.Services
 
         public TeamMember GetMemberById(int memberId)
         {
-            throw new NotImplementedException();
+            return context.TeamMembers.Find(memberId); ;
         }
 
         public TeamInfo GetTeamInfo()
@@ -38,14 +38,17 @@ namespace HelloWorldWebApp.Services
 
         public void RemoveMember(int memberId)
         {
-            var teamMember = context.TeamMembers.Find(memberId);
+            var teamMember = GetMemberById(memberId);
             context.TeamMembers.Remove(teamMember);
             context.SaveChanges();
         }
 
         public void UpdateMemberName(int memberId, string name)
         {
-            throw new NotImplementedException();
+            var teamMember = GetMemberById(memberId);
+            teamMember.Name = name;
+
+            context.SaveChanges();
         }
     }
 }
