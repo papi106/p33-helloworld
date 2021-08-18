@@ -29,7 +29,6 @@ namespace HelloWorldWebApp
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
-                     //Configuration.GetConnectionString("HerokuOriginalConnection")));
                      Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
