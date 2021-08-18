@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace HelloWorldWebApp
 {
@@ -27,9 +28,10 @@ namespace HelloWorldWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(
-                     Configuration.GetConnectionString("DefaultConnection")));
+            string databaseURL = Environment.GetEnvironmentVariable("DATABASE_URL");
+            databaseURL = databaseURL != null ? ConvertHerokuStringToASPString(databaseURL) : Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(databaseURL));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -69,6 +71,21 @@ namespace HelloWorldWebApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        public static string ConvertHerokuStringToASPString(string herokuConnectionString)
+        {
+            var databaseUri = new Uri(herokuConnectionString);
+            string[] userInfo = databaseUri.UserInfo.Split(':');
+
+            int port = databaseUri.Port;
+            string host = databaseUri.Host;
+            string userId = userInfo[0];
+            string password = userInfo[1];
+            string database = databaseUri.AbsolutePath[1..];
+
+            string result = $"Host={host};Port={port};Database={database};User Id={userId};Password={password};Pooling=true;SSL Mode=Require;TrustServerCertificate=True;Include Error Detail=True";
+            return result;
         }
     }
 }
