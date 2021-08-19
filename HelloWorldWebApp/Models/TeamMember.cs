@@ -3,10 +3,12 @@
 // </copyright>
 
 using System;
+using System.Diagnostics;
 using HelloWorldWebApp.Services;
 
 namespace HelloWorldWebApp.Models
 {
+    [DebuggerDisplay("{Name}, {Id}")]
     public class TeamMember
     {
         private static int idGenerator = 0;
@@ -35,5 +37,10 @@ namespace HelloWorldWebApp.Models
             var age = timeService.GetCurrentDate().Subtract(Birthday).Days;
             return age / 365;
         }
+
+        //public override string ToString()
+        //{
+        //    return $"Id:{Id}, Name:{Name}, Birthday:{Birthday}";
+        //}
     }
 }
