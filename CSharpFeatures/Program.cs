@@ -3,6 +3,7 @@ using HelloWorldWebApp.Services;
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace CSharpFeatures
 {
@@ -18,9 +19,13 @@ namespace CSharpFeatures
 
             File.WriteAllText("TeamMember.json",json);
 
-            string jsonFile = File.ReadAllText("TeamMember.json");
+            Task<string> jsonTask = File.ReadAllTextAsync("TeamMember.json");
+            jsonTask.Wait();
+            string jsonFile = jsonTask.Result;
+
             TeamMember deserializerMember = JsonSerializer.Deserialize<TeamMember>(jsonFile);
-            
+
+            Console.WriteLine(deserializerMember);
         }
     }
 }
