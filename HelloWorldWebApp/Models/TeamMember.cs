@@ -11,6 +11,10 @@ namespace HelloWorldWebApp.Models
     {
         private static int idGenerator = 0;
         private readonly ITimeService timeService;
+        public TeamMember()
+        {
+
+        }
 
         public TeamMember(string name, ITimeService timeService)
         {
