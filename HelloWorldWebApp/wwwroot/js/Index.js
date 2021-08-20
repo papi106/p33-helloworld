@@ -1,6 +1,20 @@
-﻿// This JS file now uses jQuery. Pls see here: https://jquery.com/
+﻿"use strict";
+var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
+
+connection.start()
+
+connection.on("NewTeamMemberAdded", function (name , id) {
+    $("#teamMembers").append(
+        `<li class="member" member-id=${id}>
+                        <span class="name" >${name}</span>
+                        <span class="delete fa fa-remove" onclick="deleteMember(${id})"></span>
+                        <span class="pencil fa fa-pencil"></span>
+                    </li>`);
+});
+
 $(document).ready(function () {
-    // see https://api.jquery.com/click/
+
+
     $("#addMembersButton").click(function () {
         var newcomerName = $("#nameField").val();
 
@@ -11,13 +25,13 @@ $(document).ready(function () {
                 teamMember: newcomerName
             },
             success: function (result) {
-                // Remember string interpolation
-                $("#teamMembers").append(
-                    `<li class="member" member-id=${result}>
-                        <span class="name" >${newcomerName}</span>
-                        <span class="delete fa fa-remove" onclick="deleteMember(${result})"></span>
-                        <span class="pencil fa fa-pencil"></span>
-                    </li>`);
+
+                //$("#teamMembers").append(
+                //    `<li class="member" member-id=${result}>
+                //        <span class="name" >${newcomerName}</span>
+                //        <span class="delete fa fa-remove" onclick="deleteMember(${result})"></span>
+                //        <span class="pencil fa fa-pencil"></span>
+                //    </li>`);
 
                 $("#nameField").val("");
                 document.getElementById("addMembersButton").disabled = true;
