@@ -35,6 +35,7 @@ namespace HelloWorldWebApp
             services.AddSingleton<ITeamService>(new TeamService());
             services.AddSingleton<ITimeService>(new TimeService());
             services.AddSingleton<IWeatherConfigurationSettings, WeatherConfigurationSettings>();
+            services.AddSignalR();
 
             services.AddControllersWithViews();
 
@@ -82,6 +83,8 @@ namespace HelloWorldWebApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapHub<MessageHub>("/messagehub");
             });
         }
     }
