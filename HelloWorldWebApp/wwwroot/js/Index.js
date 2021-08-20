@@ -6,10 +6,10 @@ connection.start()
 connection.on("NewTeamMemberAdded", function (name , id) {
     $("#teamMembers").append(
         `<li class="member" member-id=${id}>
-                        <span class="name" >${name}</span>
-                        <span class="delete fa fa-remove" onclick="deleteMember(${id})"></span>
-                        <span class="pencil fa fa-pencil"></span>
-                    </li>`);
+            <span class="name" >${name}</span>
+            <span class="delete fa fa-remove" onclick="deleteMember(${id})"></span>
+            <span class="pencil fa fa-pencil"></span>
+        </li>`);
 });
 
 $(document).ready(function () {

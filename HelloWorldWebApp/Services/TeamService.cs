@@ -9,7 +9,7 @@ namespace HelloWorldWebApp.Services
         private readonly TeamInfo teamInfo;
         private readonly ITimeService timeService;
         private readonly IHubContext<MessageHub> messageHub;
-        
+
         public TeamService(IHubContext<MessageHub> messageHubContext)
         {
             messageHub = messageHubContext;
