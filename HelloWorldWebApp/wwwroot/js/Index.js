@@ -7,6 +7,11 @@ connection.on("NewTeamMemberAdded", (name, id) => {
     createNewLine(name, id)
 });
 
+connection.on("TeamMemberDeleted", id => {
+    removeTeamMemberFromList(id)
+})
+
+
 $(document).ready(function () {
 
 
@@ -62,7 +67,7 @@ function deleteMember(index) {
             memberIndex: index
         },
         success: function (result) {
-            location.reload();
+            //location.reload();
         }
     })
 }
@@ -93,3 +98,5 @@ var createNewLine = (name, id) => {
             <span class="pencil fa fa-pencil"></span>
         </li>`);
 }
+
+const removeTeamMemberFromList = (teamMemberId) => $(`li[member-id=${teamMemberId}]`).remove()
