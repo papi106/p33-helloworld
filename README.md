@@ -22,3 +22,5 @@ Release the container
 ```
 heroku container:release -a george-ef web
 ```
+
+Heroku application link: https://george-ef.herokuapp.com/
