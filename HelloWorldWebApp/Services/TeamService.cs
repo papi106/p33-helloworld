@@ -12,7 +12,6 @@ namespace HelloWorldWebApp.Services
 
         public TeamService(IBroadcastService broadcastService)
         {
-            //messageHub = messageHubContext;
             this.broadcastService = broadcastService;
 
             this.teamInfo = new TeamInfo
