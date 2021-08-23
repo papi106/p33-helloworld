@@ -11,6 +11,10 @@ connection.on("TeamMemberDeleted", id => {
     removeTeamMemberFromList(id)
 })
 
+connection.on("UpdateTeamMember", (name, id) => {
+    updateTeamMemberFromList(name, id)
+})
+
 
 $(document).ready(function () {
 
@@ -41,9 +45,6 @@ $(document).ready(function () {
             data: {
                 memberId: id,
                 name: newName
-            },
-            success: function (result) {
-                location.reload();
             }
         })
     });
@@ -65,9 +66,6 @@ function deleteMember(index) {
         method: "DELETE",
         data: {
             memberIndex: index
-        },
-        success: function (result) {
-            //location.reload();
         }
     })
 }
@@ -100,3 +98,5 @@ var createNewLine = (name, id) => {
 }
 
 const removeTeamMemberFromList = (teamMemberId) => $(`li[member-id=${teamMemberId}]`).remove()
+
+const updateTeamMemberFromList = (teamMemberName, teamMemberId) => $(`li[member-id=${teamMemberId}]`).children(".name").text(teamMemberName)

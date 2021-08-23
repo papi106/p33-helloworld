@@ -62,6 +62,8 @@ namespace HelloWorldWebApp.Services
         {
             TeamMember member = GetMemberById(memberId);
             member.Name = name;
+
+            broadcastService.UpdateTeamMember(name, memberId);
         }
 
         public TeamMember GetMemberById(int memberId)
