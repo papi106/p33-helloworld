@@ -22,3 +22,5 @@ Release the container
 ```
 heroku container:release -a george-helloworld web
 ```
+
+Heroku link: https://dashboard.heroku.com/apps/george-helloworld
