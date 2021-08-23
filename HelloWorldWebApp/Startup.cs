@@ -32,10 +32,11 @@ namespace HelloWorldWebApp
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddSingleton<ITeamService, TeamService>();
             services.AddSingleton<ITimeService, TimeService>();
+            services.AddSingleton<IBroadcastService, BroadcastService>();
             services.AddSingleton<IWeatherConfigurationSettings, WeatherConfigurationSettings>();
-            services.AddSignalR();
 
             services.AddControllersWithViews();
 

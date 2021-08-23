@@ -8,11 +8,12 @@ namespace HelloWorldWebApp.Services
     {
         private readonly TeamInfo teamInfo;
         private readonly ITimeService timeService;
-        private readonly IHubContext<MessageHub> messageHub;
+        private readonly IBroadcastService broadcastService;
 
-        public TeamService(IHubContext<MessageHub> messageHubContext)
+        public TeamService(IBroadcastService broadcastService)
         {
-            messageHub = messageHubContext;
+            //messageHub = messageHubContext;
+            this.broadcastService = broadcastService;
 
             this.teamInfo = new TeamInfo
             {
@@ -52,7 +53,7 @@ namespace HelloWorldWebApp.Services
             TeamMember newMember = new TeamMember(name, timeService);
             teamInfo.TeamMembers.Add(newMember);
 
-            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", newMember.Name, newMember.Id);
+            broadcastService.NewTeamMemberAdded(newMember.Name, newMember.Id);
 
             return newMember.Id;
         }
