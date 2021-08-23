@@ -4,12 +4,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build
 connection.start()
 
 connection.on("NewTeamMemberAdded", function (name , id) {
-    $("#teamMembers").append(
-        `<li class="member" member-id=${id}>
-            <span class="name" >${name}</span>
-            <span class="delete fa fa-remove" onclick="deleteMember(${id})"></span>
-            <span class="pencil fa fa-pencil"></span>
-        </li>`);
+    createNewLine(name, id)
 });
 
 $(document).ready(function () {
@@ -25,14 +20,6 @@ $(document).ready(function () {
                 teamMember: newcomerName
             },
             success: function (result) {
-
-                //$("#teamMembers").append(
-                //    `<li class="member" member-id=${result}>
-                //        <span class="name" >${newcomerName}</span>
-                //        <span class="delete fa fa-remove" onclick="deleteMember(${result})"></span>
-                //        <span class="pencil fa fa-pencil"></span>
-                //    </li>`);
-
                 $("#nameField").val("");
                 document.getElementById("addMembersButton").disabled = true;
             }
@@ -97,3 +84,12 @@ function deleteMember(index) {
         document.getElementById("nameField").value = "";
     });
 }());
+
+function createNewLine(name, id) {
+    $("#teamMembers").append(
+        `<li class="member" member-id=${id}>
+            <span class="name" >${name}</span>
+            <span class="delete fa fa-remove" onclick="deleteMember(${id})"></span>
+            <span class="pencil fa fa-pencil"></span>
+        </li>`);
+}
