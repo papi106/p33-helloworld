@@ -3,7 +3,9 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build
 
 connection.start()
 
-connection.on("NewTeamMemberAdded",  createNewLine);
+connection.on("NewTeamMemberAdded", (name, id) => {
+    createNewLine(name, id)
+});
 
 $(document).ready(function () {
 
@@ -83,7 +85,7 @@ function deleteMember(index) {
     });
 }());
 
-var createNewLine => (name, id) {
+var createNewLine = (name, id) => {
     $("#teamMembers").append(
         `<li class="member" member-id=${id}>
             <span class="name" >${name}</span>
