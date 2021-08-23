@@ -88,7 +88,7 @@ function deleteMember(index) {
     });
 }());
 
-var createNewLine = (name, id) => {
+const createNewLine = (name, id) => {
     $("#teamMembers").append(
         `<li class="member" member-id=${id}>
             <span class="name" >${name}</span>
