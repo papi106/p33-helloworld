@@ -50,18 +50,18 @@ namespace HelloWorldWebApp.Controllers
 
         public IActionResult Index()
         {
-            return this.View(teamService.GetTeamInfo());
+            return View(teamService.GetTeamInfo());
         }
 
         public IActionResult Privacy()
         {
-            return this.View();
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
         
         public IActionResult Chat()
