@@ -16,18 +16,18 @@ namespace HelloWorldWebApp.Services
 
             this.teamInfo = new TeamInfo
             {
-                Name = "Team 3",
+                Name = "Team 1",
                 TeamMembers = new List<TeamMember>(),
             };
 
             string[] teamMembersData = new string[]
            {
-                "Sechei Radu",
-                "Tanase Teona",
-                "Duma Dragos",
-                "Campean Leon",
-                "Naghi Claudia",
-                "Marian George",
+                "Ema",
+                "Sorina",
+                "Fineas",
+                "Patrick",
+                "Radu",
+                "Tudor",
            };
 
             foreach (string name in teamMembersData)
