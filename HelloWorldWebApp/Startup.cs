@@ -109,8 +109,8 @@ namespace HelloWorldWebApp
 
         private async void AssignRoleProgramaticaly(IServiceProvider services)
         {
-            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-            var user = await userManager.FindByNameAsync("george@gmail.com");
+            UserManager<IdentityUser> userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            IdentityUser user = await userManager.FindByNameAsync("george@gmail.com");
             await userManager.AddToRoleAsync(user, "Administrators");
         }
 
