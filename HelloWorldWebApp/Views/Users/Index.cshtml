@@ -32,8 +32,15 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-action="AssignAdministratorRole" asp-route-id="@item.Id">Assign Administrator</a> |
-                <a asp-action="AssignUsualRole" asp-route-id="@item.Id">Assign usual user role</a>
+                @if (ViewBag.Administrators.Contains(item))
+                {
+                    <a asp-action="AssignUsualRole" asp-route-id="@item.Id">Assign usual user role</a>
+                }
+                else
+                {
+                <a asp-action="AssignAdministratorRole" asp-route-id="@item.Id">Assign Administrator</a>
+                }
+                
             </td>
         </tr>
 }
