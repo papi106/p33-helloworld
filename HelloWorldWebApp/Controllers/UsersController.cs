@@ -24,6 +24,20 @@ namespace HelloWorldWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await userManager.Users.ToListAsync());
+        } 
+
+        public async Task<IActionResult> AssignAdministratorRole(string id)
+        {
+            IdentityUser user = await userManager.FindByIdAsync(id);
+            await userManager.AddToRoleAsync(user, "Administrators");
+            return View("Index", await userManager.Users.ToListAsync());
+        }
+        
+        public async Task<IActionResult> AssignUsualRole(string id)
+        {
+            IdentityUser user = await userManager.FindByIdAsync(id);
+            await userManager.RemoveFromRoleAsync(user, "Administrators");
+            return View("Index", await userManager.Users.ToListAsync());
         }
 
         //// GET: Users/Details/5
