@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -25,18 +26,21 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public int AddTeamMember(string teamMember)
         {
             return teamService.AddTeamMember(teamMember);
         }
 
         [HttpDelete]
+        [Authorize]
         public void RemoveMember(int memberIndex)
         {
             teamService.RemoveMember(memberIndex);
         }
 
         [HttpPost]
+        [Authorize]
         public void UpdateMemberName(int memberId, string name)
         {
             teamService.UpdateMemberName(memberId, name);
