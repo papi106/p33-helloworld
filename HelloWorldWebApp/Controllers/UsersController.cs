@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using HelloWorldWebApp.Data;
 using HelloWorldWebApp.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HelloWorldWebApp.Controllers
 {
+    [Authorize(Roles = "Administrators")]
     public class UsersController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
