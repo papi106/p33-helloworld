@@ -60,7 +60,8 @@ namespace HelloWorldWebApp
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            
+
+            AssignRoleProgramaticaly(services.BuildServiceProvider());
         }
 
         /// <summary>
@@ -102,6 +103,15 @@ namespace HelloWorldWebApp
                 endpoints.MapHub<MessageHub>("/messagehub");
                 endpoints.MapRazorPages();
             });
+
+            
+        }
+
+        private async void AssignRoleProgramaticaly(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            var user = await userManager.FindByNameAsync("george@gmail.com");
+            await userManager.AddToRoleAsync(user, "Administrators");
         }
 
         public static string ConvertHerokuStringToASPString(string herokuConnectionString)
