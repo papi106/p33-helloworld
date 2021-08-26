@@ -7,7 +7,6 @@ namespace HelloWorldWebApp.Services
     public class TeamService : ITeamService
     {
         private readonly TeamInfo teamInfo;
-        private readonly ITimeService timeService;
         private readonly IBroadcastService broadcastService;
 
         public TeamService(IBroadcastService broadcastService)
@@ -45,12 +44,12 @@ namespace HelloWorldWebApp.Services
         {
             TeamMember member = GetMemberById(memberId);
             teamInfo.TeamMembers.Remove(member);
-            this.broadcastService.TeamMemberDeleted(memberId);
+            broadcastService.TeamMemberDeleted(memberId);
         }
 
         public int AddTeamMember(string name)
         {
-            TeamMember newMember = new TeamMember(name, timeService);
+            TeamMember newMember = new TeamMember() { Name = name };
             teamInfo.TeamMembers.Add(newMember);
 
             broadcastService.NewTeamMemberAdded(newMember.Name, newMember.Id);

@@ -11,21 +11,6 @@ namespace HelloWorldWebApp.Models
     [DebuggerDisplay("{Name}, {Id}")]
     public class TeamMember
     {
-        private static int idGenerator = 0;
-        private readonly ITimeService timeService;
-        public TeamMember()
-        {
-
-        }
-
-        public TeamMember(string name, ITimeService timeService)
-        {
-            Id = idGenerator++;
-            Name = name;
-
-            this.timeService = timeService;
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -34,7 +19,7 @@ namespace HelloWorldWebApp.Models
 
         public int GetAge()
         {
-            var age = timeService.GetCurrentDate().Subtract(Birthday).Days;
+            var age = DateTime.Now.Subtract(Birthday).Days;
             return age / 365;
         }
 

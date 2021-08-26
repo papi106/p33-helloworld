@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,18 +25,21 @@ namespace HelloWorldWebApp.Controllers
             this.timeService = timeService;
         }
 
+        [Authorize]
         [HttpPost]
         public int AddTeamMember(string teamMember)
         {
             return teamService.AddTeamMember(teamMember);
         }
 
+        [Authorize]
         [HttpDelete]
         public void RemoveMember(int memberIndex)
         {
             teamService.RemoveMember(memberIndex);
         }
 
+        [Authorize]
         [HttpPost]
         public void UpdateMemberName(int memberId, string name)
         {
@@ -50,18 +54,18 @@ namespace HelloWorldWebApp.Controllers
 
         public IActionResult Index()
         {
-            return this.View(teamService.GetTeamInfo());
+            return View(teamService.GetTeamInfo());
         }
 
         public IActionResult Privacy()
         {
-            return this.View();
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
         
         public IActionResult Chat()
